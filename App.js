@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+
+
+class Banner extends React.Component {
+  render() {
+    return(
+      <Image source={{uri: 'https://i.imgur.com/OvKod3d.jpg'}} style={{width: 200, height: 200}} />
+    )
+  }
+}
 
 export default class App extends React.Component {
   state = { voyage: 'Null' }
@@ -15,6 +24,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+              <Banner />
         <Text style={{fontSize: 15, color: '#fff'}}> {this.state.voyage}</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
