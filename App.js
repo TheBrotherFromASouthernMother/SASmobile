@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, ScrollView, Button, Text } from 'react-native';
 import Banner from './components/banner.js';
 import PageContainer from './components/pageContainer.js';
 import Footer from './components/footer.js';
+import { createStackNavigator } from 'react-navigation';
 
 class Nav extends React.Component {
   render() {
@@ -14,7 +15,7 @@ class Nav extends React.Component {
 }
 
 
-export default class App extends React.Component {
+class Home extends React.Component {
 
   render() {
     return (
@@ -27,6 +28,10 @@ export default class App extends React.Component {
       <Banner style ={styles} />
 
       <PageContainer children={<Nav />} />
+      <Button
+         title="Go to Details"
+         onPress={() => this.props.navigation.navigate('Default')}
+       />
       <Footer style={styles.footer} content= "CopyRight Semester At Sea 2018" />
 
 
@@ -64,3 +69,31 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+
+class DefaultScreen extends React.Component {
+  render() {
+    return (
+      <Text style={{fontSize: 25}}> Hello Fucking World </Text>
+    )
+  }
+}
+
+const RootStack = createStackNavigator({
+  Home: {
+    screen: Home,
+  },
+  Default: {
+    screen: DefaultScreen
+  },
+},
+  {
+    initialRouteName: 'Home',
+  }
+)
+
+export default class App extends React.Component {
+  render() {
+    return <RootStack />;
+  }
+}
