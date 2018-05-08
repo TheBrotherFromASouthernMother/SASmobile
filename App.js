@@ -4,11 +4,14 @@ import Banner from './components/banner.js';
 import PageContainer from './components/pageContainer.js';
 import Footer from './components/footer.js';
 import { createStackNavigator } from 'react-navigation';
+import Voyage from './components/voyage.js';
+import VoyageCountDown from './components/voyageCountdown.js';
+import Header from './components/Header.js';
 
 class Nav extends React.Component {
   render() {
     return(
-      <View style={{backgroundColor: '#fff', borderColor: 'orange', height: 100, width: 50}}>
+      <View style={{backgroundColor: 'rgba(255,255,255, 0.7)', borderColor: 'orange', height: 100, width: 50}}>
       </View>
     )
   }
@@ -21,20 +24,15 @@ class Home extends React.Component {
     return (
 
     <View name='page' style={styles.page}>
-      <View style={styles.container}>
-      <Image source={require('./images/SAS-logo-linear-rev.jpg')} style={{height: 40, width: 300}}/>
-      </View>
 
-      <Banner style ={styles} />
-
+      <Header style={styles.container} />
+      <Banner style ={styles} children={ <VoyageCountDown />}/>
       <PageContainer children={<Nav />} />
       <Button
          title="Go to Details"
          onPress={() => this.props.navigation.navigate('Default')}
        />
       <Footer style={styles.footer} content= "CopyRight Semester At Sea 2018" />
-
-
     </View>
 
     );
@@ -72,9 +70,17 @@ const styles = StyleSheet.create({
 
 
 class DefaultScreen extends React.Component {
+  componentDidMount() {
+    setTimeout( () => {
+      this.props.navigation.navigate('Home')
+    }, 3000)
+
+  }
   render() {
     return (
-      <Text style={{fontSize: 25}}> Hello Fucking World </Text>
+      <View style={{backgroundColor: '#0060B2', flex: 1, justifyContent: 'center', alignItems:'center'}}>
+      <Image source={require('./images/SAS-logo-linear-rev.jpg')} />
+      </View>
     )
   }
 }
@@ -84,7 +90,7 @@ const RootStack = createStackNavigator({
     screen: Home,
   },
   Default: {
-    screen: DefaultScreen
+    screen: Voyage
   },
 },
   {
