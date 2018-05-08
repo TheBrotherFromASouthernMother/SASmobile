@@ -7,6 +7,7 @@ import { createStackNavigator } from 'react-navigation';
 import Voyage from './components/voyage.js';
 import VoyageCountDown from './components/voyageCountdown.js';
 import Header from './components/Header.js';
+import DefaultScreen from './components/defaultScreen.js';
 
 class Nav extends React.Component {
   render() {
@@ -17,14 +18,12 @@ class Nav extends React.Component {
   }
 }
 
+//Home screen
 
 class Home extends React.Component {
-
   render() {
     return (
-
     <View name='page' style={styles.page}>
-
       <Header style={styles.container} />
       <Banner style ={styles} children={ <VoyageCountDown />}/>
       <PageContainer children={<Nav />} />
@@ -34,12 +33,34 @@ class Home extends React.Component {
        />
       <Footer style={styles.footer} content= "CopyRight Semester At Sea 2018" />
     </View>
-
     );
   }
 }
 
+//Navigation
+const RootStack = createStackNavigator({
+  Home: {
+    screen: Home,
+  },
+  Default: {
+    screen: DefaultScreen
+  },
+  Voyages: {
+    screen: Voyage
+  }
+},
+  {
+    initialRouteName: 'Home',
+  }
+)
 
+export default class App extends React.Component {
+  render() {
+    return <RootStack />;
+  }
+}
+
+//styles
 const styles = StyleSheet.create({
   page: {
     flex: 3,
@@ -67,42 +88,3 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-
-
-class DefaultScreen extends React.Component {
-  componentDidMount() {
-    setTimeout( () => {
-      this.props.navigation.navigate('Home')
-    }, 3000)
-
-  }
-  render() {
-    return (
-      <View style={{backgroundColor: '#0060B2', flex: 1, justifyContent: 'center', alignItems:'center'}}>
-      <Image source={require('./images/SAS-logo-linear-rev.jpg')} />
-      </View>
-    )
-  }
-}
-
-const RootStack = createStackNavigator({
-  Home: {
-    screen: Home,
-  },
-  Default: {
-    screen: DefaultScreen
-  },
-  Voyages: {
-    screen: Voyage
-  }
-},
-  {
-    initialRouteName: 'Voyages',
-  }
-)
-
-export default class App extends React.Component {
-  render() {
-    return <RootStack />;
-  }
-}
