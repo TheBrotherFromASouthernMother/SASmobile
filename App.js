@@ -30,7 +30,7 @@ class Home extends React.Component {
       <PageContainer children={<Nav />} />
       <Button
          title="Go to Details"
-         onPress={() => this.props.navigation.navigate('Default')}
+         onPress={() => this.props.navigation.navigate('Voyages')}
        />
       <Footer style={styles.footer} content= "CopyRight Semester At Sea 2018" />
     </View>
@@ -90,11 +90,14 @@ const RootStack = createStackNavigator({
     screen: Home,
   },
   Default: {
-    screen: Voyage
+    screen: DefaultScreen
   },
+  Voyages: {
+    screen: Voyage
+  }
 },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Voyages',
   }
 )
 
