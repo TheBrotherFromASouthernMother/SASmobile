@@ -7,6 +7,8 @@ let lifeatsea = `Go to class while sailing the sea, watch the sunset over the In
 
 let floatingCampus = `Our ship is the most unique floating campus in the world. The seven deck, 590-foot ship is where you learn, live, travel and reflect on your global, study abroad experience.`;
 
+let shipboardComuminty = `If you ever speak to an SAS alum about what they loved most about the experience, they’ll all tell you it’s the community. Spend your semester making lifelong friendships and sharing a world of experiences together.`;
+
 export default class PageContainer extends React.Component {
  render() {
    return(
@@ -16,17 +18,18 @@ export default class PageContainer extends React.Component {
         <InfoSection sectionTitle={'Life at Sea'} sectionContent={lifeatsea} imageSrc={require('../images/DSC_0745.jpg')} />
 
         <InfoSection sectionTitle = {'Our Floating Campus'} sectionContent={floatingCampus} imageSrc={require('../images/DSC_3657.jpg')} />
+
+        <InfoSection sectionTitle = {' Shipboard Community'} sectionContent = {shipboardComuminty} imageSrc={require('../images/DSC_3774.jpg')} />
         </ScrollView>
+
       </ImageBackground>
      </View>
      )
   }
 }
 
-
 class InfoSection extends React.Component {
   render() {
-    console.log(this.props.imageSrc)
     return(
     <View>
       <H1 content={this.props.sectionTitle} />

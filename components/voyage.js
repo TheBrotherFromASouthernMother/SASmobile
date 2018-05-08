@@ -17,11 +17,14 @@ export default class Voyage extends React.Component {
     }).then( response => {
        return response.json()
     }).then( (data) => {
-      console.log(data.data.tagline);
       this.setState({voyageData: data.data})
     }).catch(err => {
       console.log(err, 'err')
     })
+  }
+
+  ComponentWillUnmount() {
+    this.setState({voyageData: null})
   }
 
   render() {
