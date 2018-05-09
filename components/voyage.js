@@ -3,13 +3,17 @@ import { StyleSheet, View, Image, ScrollView, Button, Text } from 'react-native'
 import Header from './Header.js';
 import Banner from './banner.js';
 import H1 from './h1.js';
+import { MapView } from 'expo';
+const { Marker } = MapView
 
 
 export default class Voyage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { voyageData : ' '}
+    this.state = { voyageData : ' ',
+                   markers: [{key: '5', coordinate: {latitude: 9.9312, longitude: 76.2673}, title: 'port of Kochi'}]
+    }
   }
 
   componentWillMount() {
@@ -40,7 +44,22 @@ export default class Voyage extends React.Component {
       <H1 content={`${capitalizeFirstLetter(this.state.voyageData.semester)} ${this.state.voyageData.year}: \n ${this.state.voyageData.tagline}`} />
       <Image source={{uri: `http://semesteratsea-api.herokuapp.com/${this.state.voyageData.header_photo_url}`}} style={{width: 300, height: 150, alignSelf: 'center'}} />
       <Text> If you ever speak to an SAS alum about what they loved most about the experience, they’ll all tell you it’s the community. Spend your semester making lifelong friendships and sharing a world of experiences together </Text>
+      <MapView
+       style={{ width: 300, height: 300 }}
+       >
+
+       {this.state.markers.map(marker => (
+         <Marker
+         key = {marker.key}
+         coordinate={marker.coordinate}
+         title={marker.title}
+         />
+       ))}
+
+     </MapView >
       </View>
+
+
 
       </ScrollView>
     )
