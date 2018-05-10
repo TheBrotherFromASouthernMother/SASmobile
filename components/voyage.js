@@ -30,17 +30,14 @@ export default class Voyage extends React.Component {
       this.setState( prevState =>  {return {voyageData: data.data} })
 
       let i = 0
-      // this.state.voyageData.forEach( (object) => {
-      while (i < this.state.voyageData.length) {
+      this.state.voyageData.forEach( (object) => {
         this.setState( prevState => {
           console.log(typeof prevState.markers)
           return { markers:
-          prevState.markers.concat({key: i, coordinate: {latitude: Number(this.state.voyageData[i].latitude) ,longitude: Number(this.state.voyageData[i].longitude)}, title: `port of ${this.state.voyageData[i].city}`})
+          prevState.markers.concat({key: i, coordinate: {latitude: Number(object.latitude) ,longitude: Number(object.longitude)}, title: `port of ${object.city}`})
         }})
         i++;
-      }
-        // i ++;
-      // })
+      })
     }).catch(err => {
       console.log(err, 'err')
     })
@@ -49,11 +46,9 @@ export default class Voyage extends React.Component {
   }
 
   componentWillUnmount() {
-    this.setState({voyageData: null, markers: null})
+    this.setState({voyageData: " ", markers: " "})
   }
 
-  componentDidUpdate() {
-  }
 
   render() {
     return(
@@ -64,8 +59,11 @@ export default class Voyage extends React.Component {
 
       <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
       <H1 content={`${capitalizeFirstLetter(this.state.voyageData[0].semester)} ${this.state.voyageData[0].year}: \n ${this.state.voyageData[0].tagline}`} />
+      
       <Image source={{uri: `http://semesteratsea-api.herokuapp.com/${this.state.voyageData[0].header_photo_url}`}} style={{width: 300, height: 150, alignSelf: 'center'}} />
+
       <Text> If you ever speak to an SAS alum about what they loved most about the experience, they’ll all tell you it’s the community. Spend your semester making lifelong friendships and sharing a world of experiences together </Text>
+
       <MapView
        style={{ width: 375, height: 300 }}
        initialRegion={{
