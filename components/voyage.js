@@ -99,10 +99,7 @@ export default class Voyage extends React.Component {
       )})}
 
      </MapView >
-
-
       </View>
-
 
 
       </ScrollView>
