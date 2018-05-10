@@ -8,6 +8,7 @@ import Voyage from './components/voyage.js';
 import VoyageCountDown from './components/voyageCountdown.js';
 import Header from './components/Header.js';
 import DefaultScreen from './components/defaultScreen.js';
+import ListScreen from './components/voyageList.js';
 
 class Nav extends React.Component {
   render() {
@@ -29,7 +30,7 @@ class Home extends React.Component {
       <PageContainer children={<Nav />} />
       <Button
          title="Go to Details"
-         onPress={() => this.props.navigation.navigate('Voyages')}
+         onPress={() => this.props.navigation.navigate('Voyage')}
        />
       <Footer style={styles.footer} content= "CopyRight Semester At Sea 2018" />
     </View>
@@ -45,12 +46,15 @@ const RootStack = createStackNavigator({
   Default: {
     screen: DefaultScreen
   },
-  Voyages: {
+  Voyage: {
     screen: Voyage
+  },
+  listScreen: {
+    screen: ListScreen
   }
 },
   {
-    initialRouteName: 'Voyages',
+    initialRouteName: 'Voyage',
   }
 )
 
