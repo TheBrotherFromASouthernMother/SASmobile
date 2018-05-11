@@ -1,32 +1,40 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { createStore } from 'redux'
-
-const types = {
-  INCREMENT: 'INCREMENT'
-}
-
-const reducer = (state, action) => {
-  if (action.type === types.INCREMENT) {
-    return {count: state.count + 1, text: state.text += action.text}
-  }
-  return state
-}
-
-const initialState = {count: 0}
-
-const store = createStore(reducer, initialState);
+import { View, Text, Button } from 'react-native';
+import { createStore } from 'redux';
+import Header from './Header.js';
+import Banner from './banner.js';
+import H1 from './h1.js'
 
 
 export default class ListScreen extends React.Component {
-  componentWillMount() {
-    store.dispatch({type: types.INCREMENT, text: 'Rawr '});
-    store.dispatch({type: types.INCREMENT, text: 'I am Gotham\'s recknoning'});
-  }
+  static navigationOptions = {
+   title: 'Voyages',
+   headerStyle: {
+     backgroundColor: '#fff',
+     height: 30
+   }
+ }
+
   render() {
     return (
       <View>
-      <Text> {'Count: ' + store.getState().count}, {store.getState().text}</Text>
+      <Header />
+      <Banner children={<Text style={{fontSize:25, color: '#FFFFFF', textAlign: 'center'}}>Come home with a global perspective. </Text>}/>
+      <View style={{alignItems: 'center', justifyContent: 'space-between'}} >
+      <H1 content={'Explore Voyages'} />
+      <Button
+      title="Fall 2017: A Voyage Around the World"
+      onPress={() => this.props.navigation.navigate('Voyage', {semester: 'fall', year: '2017'})}
+      />
+      <Button
+      title="Spring 2016: A Voyage Around the World"
+      onPress={() => this.props.navigation.navigate('Voyage', {semester: 'spring', year: '2016'})}
+      />
+      <Button
+      title="Fall 2015: Atlantic & Carribean Exploration"
+      onPress={() => this.props.navigation.navigate('Voyage', {semester: 'fall', year: '2015'})}
+      />
+      </View>
       </View>
     )
   }

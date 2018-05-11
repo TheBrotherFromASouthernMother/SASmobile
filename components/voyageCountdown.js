@@ -21,6 +21,10 @@ export default class VoyageCountDown extends React.Component {
       this.setState( (prevState, props) => { return { nextVoyage: timer} })
     }, 1000)
   }
+
+  componentWillUnmount() {
+    this.setState({nextVoyage: ""})
+  }
   render() {
     return (
       <Text style={{fontSize:25, color: '#FFFFFF',textAlign: 'center'}}> {this.state.nextVoyage} </Text>

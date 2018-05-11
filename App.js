@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, ScrollView, Button, Text } from 'react-native';
+import { StyleSheet, View, Image, ScrollView, Button, Text, StatusBar } from 'react-native';
 import Banner from './components/banner.js';
 import PageContainer from './components/pageContainer.js';
 import Footer from './components/footer.js';
@@ -22,18 +22,24 @@ class Nav extends React.Component {
 //Home screen
 
 class Home extends React.Component {
+  static navigationOptions = {
+   title: 'Home',
+   headerStyle: {
+     backgroundColor: '#fff',
+     height: 30
+   }
+ }
   render() {
     return (
-    <View name='page' style={styles.page}>
+    <ScrollView name='page' style={styles.page}>
       <Header style={styles.container} />
       <Banner style ={styles} children={ <VoyageCountDown />}/>
-      <PageContainer children={<Nav />} />
-      <Button
-         title="Go to Details"
-         onPress={() => this.props.navigation.navigate('Voyage')}
-       />
+      <PageContainer children={  <Button
+           title="Go to Details"
+           onPress={() => this.props.navigation.navigate('listScreen')}
+         />} />
       <Footer style={styles.footer} content= "CopyRight Semester At Sea 2018" />
-    </View>
+    </ScrollView>
     );
   }
 }
@@ -87,7 +93,6 @@ const styles = StyleSheet.create({
   },
   footer: {
     backgroundColor: '#0060B2',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   }

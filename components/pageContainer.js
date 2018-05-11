@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, View, Text, ScrollView, Image } from 'react-native';
+import { ImageBackground, View, Text, ScrollView, Image, Button } from 'react-native';
 import H1 from './h1.js'
 
 
@@ -13,13 +13,14 @@ export default class PageContainer extends React.Component {
  render() {
    return(
     <View style={{flex: 3}}>
-      <ImageBackground style={{width: 375, height: 400, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'flex-end'}} source={require('../images/worldOdyssey.jpg')}>
+      <ImageBackground style={{width: 375, height: 450, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'flex-end'}} source={require('../images/worldOdyssey.jpg')}>
         <ScrollView style={{backgroundColor: 'rgba(255, 255, 255, 0.6)', width: 200}}>
         <InfoSection sectionTitle={'Life at Sea'} sectionContent={lifeatsea} imageSrc={require('../images/DSC_0745.jpg')} />
 
         <InfoSection sectionTitle = {'Our Floating Campus'} sectionContent={floatingCampus} imageSrc={require('../images/DSC_3657.jpg')} />
 
-        <InfoSection sectionTitle = {' Shipboard Community'} sectionContent = {shipboardComuminty} imageSrc={require('../images/DSC_3774.jpg')} />
+        <InfoSection sectionTitle = {'Shipboard Community'} sectionContent = {shipboardComuminty} imageSrc={require('../images/DSC_3774.jpg')} />
+        {this.props.children}
         </ScrollView>
 
       </ImageBackground>

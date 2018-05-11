@@ -28,23 +28,36 @@ const store = createStore(reducer, initialState);
 
 
 export default class Voyage extends React.Component {
+  static navigationOptions = {
+   title: 'Voyage',
+   headerStyle: {
+     backgroundColor: '#fff',
+     height: 30
+   }
+ }
+
+
   constructor(props) {
     super(props);
 
     this.state = { voyageData : ' ',
                    markers: []
     }
+    console.log(this.props.navigation.getParam('semester', 'spring'))
+    console.log(this.props.navigation.getParam('year', '2016'))
   }
 
   componentDidMount() {
-    fetch('http://semesteratsea-api.herokuapp.com/api/voyages/spring&2016', {
+    let semester = this.props.navigation.getParam('semester', 'spring');
+    let year = this.props.navigation.getParam('year', '2016');
+    fetch(`http://semesteratsea-api.herokuapp.com/api/voyages/${semester}&${year}`, {
       method: 'GET'
     }).then( response => {
        return response.json()
     }).then( (data) => {
       store.dispatch({type: types.SET_VOYAGE_DATA, voyageData: data.data});
       this.setState( prevState =>  {return {voyageData: store.getState().voyageData} })
-
+      console.log(this.state.voyageData[0].header_photo_url)
       let i = 0
       this.state.voyageData.forEach( (object) => {
         this.setState( prevState => {
@@ -72,15 +85,17 @@ export default class Voyage extends React.Component {
       < Header style={{justifyContent: 'center', alignItems: 'flex-start',  height: 100, backgroundColor: '#0060B2'}}/>
       </View>
 
-      <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
-      <H1 content={`${capitalizeFirstLetter(this.state.voyageData[0].semester)} ${this.state.voyageData[0].year}: \n ${this.state.voyageData[0].tagline}`} />
+      <View style={{flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center', padding: 5}}>
+    <H1 content={`${capitalizeFirstLetter(this.state.voyageData[0].semester)} ${this.state.voyageData[0].year}: \n ${this.state.voyageData[0].tagline}`} />
 
-      <Image source={{uri: `http://semesteratsea-api.herokuapp.com/${this.state.voyageData[0].header_photo_url}`}} style={{width: 300, height: 150, alignSelf: 'center'}} />
+    <Image source={{uri: `http://semesteratsea-api.herokuapp.com/${this.state.voyageData[0].header_photo_url}`}} style={{width: 300, height: 150, alignSelf: 'center'}} />
 
-      <Text> If you ever speak to an SAS alum about what they loved most about the experience, they’ll all tell you it’s the community. Spend your semester making lifelong friendships and sharing a world of experiences together </Text>
+      <Text>Visiting Europe, Africa, Asia, and North America, this voyage gives participants a truly global comparative experience as the ship explores various cultures around the world. </Text>
+
+      <H1 content={'Explore this voyage\'s ports of call'}/>
 
       <MapView
-       style={{ width: 375, height: 300 }}
+       style={{ width: 365, height: 300 }}
        initialRegion={{
          latitude: 9.9312,
          longitude: 76.2673,
@@ -89,7 +104,6 @@ export default class Voyage extends React.Component {
        }}>
 
        {this.state.markers.map(marker => {
-         console.log(store.getState().voyageData[1])
         return(
         <Marker
         key = {marker.key}
