@@ -10,6 +10,7 @@
 
 ## Key Technologies
  * React Native
+ * Redux
  * JavaScript
  * Node.js
  * Express.js
