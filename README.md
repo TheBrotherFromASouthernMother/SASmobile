@@ -6,6 +6,8 @@
 ## Getting Started
 <p> This app is currently in development, a short walkthrough displaying basic functionality can be found here: <a href="https://www.dropbox.com/s/63hwshvca5f4qvr/slack_for_ios_upload.mov?dl=0"> Live Video Link </a> </p>
 
+<p align="center"><a href="https://media.giphy.com/media/1o1umckWSeI29ex1kg/giphy.gif"></a></p>
+
 
 
 ## Key Technologies
